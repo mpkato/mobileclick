@@ -11,8 +11,8 @@ setup(
     version='0.0.1',
     packages=['mobileclick'],
     #install_requires = ['BeautifulSoup'], #open('requirements.txt').read().splitlines(),
-    #entry_points = {
-    #    'console_scripts': ['download_mobileclick_data=mobileclick.scripts:download_mobileclick_data'],
-    #},
+    entry_points = {
+        'console_scripts': ['download_mobileclick_data=mobileclick.scripts:download_mobileclick_data'],
+    },
     #tests_require=['nose']
 )
