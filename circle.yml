@@ -1,6 +1,9 @@
 machine:
     python:
         version: 2.7.9
+dependencies:
+    pre:
+        - pip install --upgrade setuptools
 test:
     pre:
         - nosetests tests/scripts_test.py
