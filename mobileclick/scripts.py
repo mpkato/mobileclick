@@ -1,17 +1,24 @@
 # -*- coding:utf-8 -*-
 
 MOBILECLICK_URL = 'http://www.mobileclick.org'
+DOCUMENT_A_TEXT = 'Document Collection (~ 1GB)'
+SUBSET_A_TEXT = 'Subset (~ 50MB)'
 
-def download_mobileclick_data():
-    import sys, getpass
-    print "Please input the email and password for %s" % MOBILECLICK_URL
-    sys.stdout.write('Email: ')
-    email = raw_input()
-    password = getpass.getpass()
+def download_mobileclick_data(istest=False):
+    import sys, os, getpass
+    email = os.environ.get('MOBILECLICK_EMAIL', None)
+    password = os.environ.get('MOBILECLICK_PASSWORD', None)
+    if email is None or password is None:
+        # if env variables are not set
+        print "Please input the email and password for %s" % MOBILECLICK_URL
+        sys.stdout.write('Email: ')
+        email = raw_input()
+        password = getpass.getpass()
     if login(email, password):
-        links = find_download_links()
+        links = find_download_links(istest)
         for link in links:
-            download_file(link)
+            filename = download_file(link)
+            deploy_data(filename)
     else:
         print "Login failed"
 
@@ -66,18 +73,31 @@ def download_file(url):
             sys.stdout.flush()
     print
     print "Downloaded: {0}".format(url)
+    return filename
 
-def find_download_links():
+def find_download_links(istest):
     import urllib2, BeautifulSoup
     res = urllib2.urlopen('%s/home/data' % MOBILECLICK_URL)
     html = BeautifulSoup.BeautifulSoup(res.read())
     def is_download_link(node):
         return node.name == 'a' and node.getText() == 'Download'
     link = html.find(is_download_link)['href'] + '?dl=1'
+    atext = SUBSET_A_TEXT if istest else DOCUMENT_A_TEXT
     def is_download_doclink(node):
-        return node.name == 'a' and node.getText() == 'Document Collection (~ 1GB)'
+        return node.name == 'a' and node.getText() == atext
     doclink = html.find(is_download_doclink)['href'] + '?dl=1'
     return (link, doclink)
+
+def deploy_data(filename):
+    import os, tarfile, zipfile, glob
+    if tarfile.is_tarfile(filename):
+        with tarfile.open(filename, 'r') as tf:
+            tf.extractall('./data')
+    for filepath in glob.glob('./data/*/*.zip'):
+        basedir = os.path.dirname(filepath)
+        if zipfile.is_zipfile(filepath):
+            with zipfile.ZipFile(filepath, 'r') as zf:
+                zf.extractall(basedir + '/')
 
 if __name__ == '__main__':
     download_mobileclick_data()
