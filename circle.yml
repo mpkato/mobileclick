@@ -1,3 +1,6 @@
 machine:
-  python:
-      version: 2.7.9
+    python:
+        version: 2.7.9
+test:
+    pre:
+        - nosetests tests/scripts_test.py
