@@ -3,4 +3,4 @@ machine:
         version: 2.7.9
 test:
     pre:
-        - download_mobileclick_data
+        - nosetests tests/scripts_test.py
