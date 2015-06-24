@@ -14,5 +14,5 @@ setup(
     entry_points = {
         'console_scripts': ['download_mobileclick_data=mobileclick.scripts:main'],
     },
-    #tests_require=['nose']
+    tests_require=['nose']
 )
