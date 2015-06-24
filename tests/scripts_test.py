@@ -21,7 +21,7 @@ class ScriptsTestCase(unittest.TestCase):
             download_mobileclick_data(istest=True)
             # files to be downloaded
             for f in files:
-                unittest.TestCase.assertTrue(os.path.exists(f))
+                self.assertTrue(os.path.exists(f))
 
 if __name__ == '__main__':
     nose.main(argv=['nose', '-v'])
