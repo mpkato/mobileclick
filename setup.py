@@ -1,27 +1,15 @@
 # -*- coding:utf-8 -*-
-from setuptools import setup, find_packages
-import os
-import sys
+from setuptools import setup
 
-def find_scripts(scripts_path):
-  base_path = os.path.abspath(scripts_path)
-  return list(map(lambda path: os.path.join(scripts_path, path), 
-           filter(lambda file_name: os.path.isfile(
-             os.path.join(base_path, file_name)), os.listdir(base_path)
-         )))
-
-
-libdir = "lib/mobileclick"
-sys.path.insert(0, libdir)
-
-import info
-import version
-setup_options = info.INFO
-setup_options["version"] = version.VERSION
-setup_options.update(dict(
-  install_requires = open('requirements.txt').read().splitlines(),
-  packages         = find_packages(libdir),
-  package_dir      = {"": libdir},
-))
-
-setup(**setup_options)
+setup(
+    name        = "mobileclick",
+    description = "mobileclick provides baseline methods and utility scripts for the NTCIR-12 MobileClick-2 task",
+    author      = "Makoto P. Kato",
+    author_email = "kato@dl.kuis.kyoto-u.ac.jp",
+    license     = "MIT License",
+    url         = "https://github.com/mpkato/mobileclick",
+    version='0.0.1',
+    packages=['mobileclick'],
+    package_data={'chainer.requirements': ['cuda-requirements.txt']},
+    tests_require=['nose'],
+)
