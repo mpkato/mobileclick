@@ -4,7 +4,7 @@ MOBILECLICK_URL = 'http://www.mobileclick.org'
 DOCUMENT_A_TEXT = 'Document Collection (~ 1GB)'
 SUBSET_A_TEXT = 'Subset (~ 50MB)'
 
-def download_mobileclick_data(istest=False):
+def main(istest=False):
     import sys, os, getpass
     email = os.environ.get('MOBILECLICK_EMAIL', None)
     password = os.environ.get('MOBILECLICK_PASSWORD', None)
@@ -100,4 +100,4 @@ def deploy_data(filename):
                 zf.extractall(basedir + '/')
 
 if __name__ == '__main__':
-    download_mobileclick_data()
+    main()

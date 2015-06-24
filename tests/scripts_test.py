@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from mobileclick.scripts import download_mobileclick_data
+from mobileclick.scripts import main
 
 class ScriptsTestCase(unittest.TestCase):
     def setUp(self):
@@ -18,7 +18,7 @@ class ScriptsTestCase(unittest.TestCase):
             ]
         # check if files have been downloaded
         if not all([os.path.exists(f) for f in files]):
-            download_mobileclick_data(istest=True)
+            main(istest=True)
             # files to be downloaded
             for f in files:
                 self.assertTrue(os.path.exists(f))
