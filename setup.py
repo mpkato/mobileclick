@@ -10,7 +10,7 @@ setup(
     url         = "https://github.com/mpkato/mobileclick",
     version='0.0.1',
     packages=['mobileclick'],
-    install_requires = ['BeautifulSoup'], #open('requirements.txt').read().splitlines(),
+    install_requires = ['BeautifulSoup'],
     entry_points = {
         'console_scripts': ['download_mobileclick_data=mobileclick.scripts:download_mobileclick_data'],
     },
