@@ -59,7 +59,6 @@ class RankingRunTestCase(MethodTestCase):
         '''
         run = RankingRun('ORG-test-1', 'this is a test run')
         for task in self.tasks[:-2]:
-            print task.query.qid
             run.add(task.query.qid, [(i, 0) for i in task.iunits])
         queries = [t.query for t in self.tasks]
         self.assertFalse(run.validation(queries))
