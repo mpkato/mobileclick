@@ -18,7 +18,7 @@ class RetrievalRunTestCase(unittest.TestCase):
             './data/MC2-training-documents/1C2-E.INDX/',
             './data/MC2-training-documents/1C2-E.HTML/')
         if not os.path.exists('./tmp'):
-            raise Exception('TMP NOT FOUND')
+            os.mkdir('./tmp')
 
     def tearDown(self):
         drop_query_subset()
