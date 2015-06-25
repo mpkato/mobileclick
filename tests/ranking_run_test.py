@@ -12,7 +12,7 @@ class RankingRunTestCase(MethodTestCase):
         '''
         run = RankingRun('ORG-test-1', 'this is a test run')
         for task in self.tasks:
-            run.add(task.query.qid, task.iunits)
+            run.add(task.query.qid, [(i, 0) for i in task.iunits])
         run.save('./tmp')
         self.assertTrue(os.path.exists('./tmp/ORG-test-1.tsv'))
         with open('./tmp/ORG-test-1.tsv', 'r') as f:
@@ -20,7 +20,7 @@ class RankingRunTestCase(MethodTestCase):
         self.assertEqual(len(lines),
             sum([len(t.iunits) for t in self.tasks]) + 1)
         self.assertEqual(lines[0].strip(), 'this is a test run')
-        self.assertEqual(len(lines[1].split('\t')), 2)
+        self.assertEqual(len(lines[1].split('\t')), 3)
 
     def test_bad_break(self):
         '''
@@ -39,7 +39,7 @@ class RankingRunTestCase(MethodTestCase):
         run = RankingRun('ORG-test-1', 'this is a test run')
         iunits = []
         for task in self.tasks:
-            run.add(task.query.qid, task.iunits)
+            run.add(task.query.qid, [(i, 0) for i in task.iunits])
             for i in task.iunits:
                 iunits.append(i.uid)
         run.save('./tmp')
@@ -60,11 +60,11 @@ class RankingRunTestCase(MethodTestCase):
         run = RankingRun('ORG-test-1', 'this is a test run')
         for task in self.tasks[:-2]:
             print task.query.qid
-            run.add(task.query.qid, task.iunits)
+            run.add(task.query.qid, [(i, 0) for i in task.iunits])
         queries = [t.query for t in self.tasks]
         self.assertFalse(run.validation(queries))
         for task in self.tasks[-2:]:
-            run.add(task.query.qid, task.iunits)
+            run.add(task.query.qid, [(i, 0) for i in task.iunits])
         self.assertTrue(run.validation(queries))
 
     def test_duplicate_addition(self):

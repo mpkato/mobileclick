@@ -12,8 +12,8 @@ class BaseRankingMethod(object):
         self.init(tasks)
         result = RankingRun(name, desc)
         for task in tasks:
-            ranked_iunits = self.rank(task)
-            result.add(task.query.qid, ranked_iunits)
+            ranked_iunit_scores = self.rank(task)
+            result.add(task.query.qid, ranked_iunit_scores)
         return result
 
     @abstractmethod

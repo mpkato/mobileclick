@@ -14,14 +14,14 @@ class RankingRun(object):
         self.desc = desc
         self.results = {}
 
-    def add(self, qid, iunits):
+    def add(self, qid, iunit_scores):
         '''
         Add a sorted iUnit list
         Do not add iUnits more than once for the same QID
         '''
         if qid in self.results:
             raise Exception("Duplicate addition: %s" % qid)
-        self.results[qid] = iunits
+        self.results[qid] = iunit_scores
 
     def save(self, dirpath='./'):
         '''
@@ -33,9 +33,9 @@ class RankingRun(object):
             # desc line
             f.write(remove_breaks(self.desc) + '\n')
             for qid in qids:
-                iunits = self.results[qid]
-                for iunit in iunits:
-                    f.write('%s\n' % iunit.output())
+                iunit_scores = self.results[qid]
+                for iunit, score in iunit_scores:
+                    f.write('%s\t%s\n' % (iunit.output(), score))
 
     def validation(self, queries):
         '''

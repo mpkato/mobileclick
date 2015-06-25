@@ -13,4 +13,4 @@ class RandomRankingMethod(BaseRankingMethod):
         '''
         Output iUnits in the same order in the iUnit file
         '''
-        return task.iunits
+        return [(i, 0) for i in task.iunits]
