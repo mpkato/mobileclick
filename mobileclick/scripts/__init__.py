@@ -1,1 +1,0 @@
-from .download_mobileclick_data import main as download_mobileclick_data

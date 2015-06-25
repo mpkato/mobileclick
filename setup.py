@@ -12,7 +12,7 @@ setup(
     packages=['mobileclick'],
     install_requires = ['BeautifulSoup'],
     entry_points = {
-        'console_scripts': ['download_mobileclick_data=mobileclick.scripts.download_mobileclick_data:main'],
+        'console_scripts': ['mobileclick_download_data=mobileclick.scripts.mobileclick_download_data:main'],
     },
     tests_require=['nose']
 )
