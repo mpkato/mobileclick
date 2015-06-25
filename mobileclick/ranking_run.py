@@ -2,7 +2,7 @@
 import os
 from .utils import safe_filename, remove_breaks
 
-class RetrievalRun(object):
+class RankingRun(object):
     FILENAME_TEMPLATE = '%s.tsv'
 
     def __init__(self, name, desc):

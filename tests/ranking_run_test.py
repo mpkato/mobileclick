@@ -3,10 +3,10 @@ import unittest
 import nose
 import os
 from mobileclick.task import Task
-from mobileclick.retrieval_run import RetrievalRun
+from mobileclick.ranking_run import RankingRun
 from .testutils import create_query_subset, drop_query_subset
 
-class RetrievalRunTestCase(unittest.TestCase):
+class RankingRunTestCase(unittest.TestCase):
     INDX_DIRPATH = './data/MC2-training-documents/1C2-E.INDX/'
 
     def setUp(self):
@@ -25,7 +25,7 @@ class RetrievalRunTestCase(unittest.TestCase):
         '''
         Task.read
         '''
-        run = RetrievalRun('ORG-test-1', 'this is a test run')
+        run = RankingRun('ORG-test-1', 'this is a test run')
         for task in self.tasks:
             run.add(task.query.qid, task.iunits)
         run.save('./tmp')
@@ -41,7 +41,7 @@ class RetrievalRunTestCase(unittest.TestCase):
         '''
         Ensure no break in the first line
         '''
-        run = RetrievalRun('ORG-test-1', 'this is \n a test run')
+        run = RankingRun('ORG-test-1', 'this is \n a test run')
         run.save('./tmp')
         with open('./tmp/ORG-test-1.tsv', 'r') as f:
             lines = f.readlines()
@@ -51,7 +51,7 @@ class RetrievalRunTestCase(unittest.TestCase):
         '''
         Ensure all the iUnits are included
         '''
-        run = RetrievalRun('ORG-test-1', 'this is a test run')
+        run = RankingRun('ORG-test-1', 'this is a test run')
         iunits = []
         for task in self.tasks:
             run.add(task.query.qid, task.iunits)
@@ -72,7 +72,7 @@ class RetrievalRunTestCase(unittest.TestCase):
         '''
         Test the validation
         '''
-        run = RetrievalRun('ORG-test-1', 'this is a test run')
+        run = RankingRun('ORG-test-1', 'this is a test run')
         for task in self.tasks[:-2]:
             print task.query.qid
             run.add(task.query.qid, task.iunits)
@@ -84,9 +84,9 @@ class RetrievalRunTestCase(unittest.TestCase):
 
     def test_duplicate_addition(self):
         '''
-        RetrievalRun.add raises if iUnits were added more than once for the same QID
+        RankingRun.add raises if iUnits were added more than once for the same QID
         '''
-        run = RetrievalRun('ORG-test-1', 'this is a test run')
+        run = RankingRun('ORG-test-1', 'this is a test run')
         run.add('1', [])
         self.assertRaises(Exception, run.add, '1', [])
 
