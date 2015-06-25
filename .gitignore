@@ -59,3 +59,4 @@ target/
 # unique for this package
 /MC2*
 /data
+/runs
