@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from mobileclick.scripts import main
+from mobileclick.scripts.download_mobileclick_data import main
 
 class ScriptsTestCase(unittest.TestCase):
     def setUp(self):
