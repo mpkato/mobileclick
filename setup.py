@@ -12,7 +12,10 @@ setup(
     packages=['mobileclick', 'mobileclick.scripts'],
     install_requires = ['BeautifulSoup'],
     entry_points = {
-        'console_scripts': ['mobileclick_download_data=mobileclick.scripts.mobileclick_download_data:main'],
+        'console_scripts': [
+            'mobileclick_download_data=mobileclick.scripts.mobileclick_download_data:main',
+            'mobileclick_random_ranking_method=mobileclick.scripts.mobileclick_random_ranking_method:main'
+            ],
     },
     tests_require=['nose']
 )
