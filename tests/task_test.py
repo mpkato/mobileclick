@@ -5,12 +5,11 @@ from mobileclick.task import Task
 from .testutils import create_query_subset, drop_query_subset
 
 class TaskTestCase(unittest.TestCase):
-    INDX_DIRPATH = './data/MC2-training-documents/1C2-E.INDX/'
 
     def setUp(self):
         self.queryfilepath = create_query_subset(
             './data/MC2-training/en/1C2-E-queries.tsv',
-            self.INDX_DIRPATH)
+            './data/MC2-training-documents/1C2-E.INDX/')
 
     def tearDown(self):
         drop_query_subset()

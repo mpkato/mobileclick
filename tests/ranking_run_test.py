@@ -1,25 +1,10 @@
 # -*- coding:utf-8 -*-
-import unittest
 import nose
 import os
-from mobileclick.task import Task
 from mobileclick.ranking_run import RankingRun
-from .testutils import create_query_subset, drop_query_subset
+from .method_test import MethodTestCase
 
-class RankingRunTestCase(unittest.TestCase):
-    INDX_DIRPATH = './data/MC2-training-documents/1C2-E.INDX/'
-
-    def setUp(self):
-        self.queryfilepath = create_query_subset(
-            './data/MC2-training/en/1C2-E-queries.tsv',
-            self.INDX_DIRPATH)
-        self.tasks = Task.read(self.queryfilepath,
-            './data/MC2-training/en/1C2-E-iunits.tsv',
-            './data/MC2-training-documents/1C2-E.INDX/',
-            './data/MC2-training-documents/1C2-E.HTML/')
-
-    def tearDown(self):
-        drop_query_subset()
+class RankingRunTestCase(MethodTestCase):
 
     def test_task_read(self):
         '''
