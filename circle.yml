@@ -6,8 +6,8 @@ dependencies:
         - pip install --upgrade setuptools
 test:
     pre:
+        - python -m nltk.downloader maxent_treebank_pos_tagger punkt
         - nosetests tests/scripts_test.py
 general:
     artifacts:
         - "runs"
-

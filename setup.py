@@ -11,10 +11,11 @@ setup(
     version='0.0.1',
     packages=[
         'mobileclick',
+        'mobileclick.nlp',
         'mobileclick.methods',
         'mobileclick.scripts'
         ],
-    install_requires = ['BeautifulSoup'],
+    install_requires = ['BeautifulSoup', 'nltk', 'numpy'],
     entry_points = {
         'console_scripts': [
             'mobileclick_download_data=mobileclick.scripts.mobileclick_download_data:main',
