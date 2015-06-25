@@ -8,6 +8,12 @@ class Iunit(object):
         self.uid = uid
         self.body = body
 
+    def output(self):
+        '''
+        Output format for submission
+        '''
+        return '\t'.join((self.qid, self.uid))
+
     @classmethod
     def read(cls, filepath):
         '''
