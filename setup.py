@@ -9,7 +9,7 @@ setup(
     license     = "MIT License",
     url         = "https://github.com/mpkato/mobileclick",
     version='0.0.1',
-    packages=['mobileclick'],
+    packages=['mobileclick', 'mobileclick.scripts'],
     install_requires = ['BeautifulSoup'],
     entry_points = {
         'console_scripts': ['mobileclick_download_data=mobileclick.scripts.mobileclick_download_data:main'],
