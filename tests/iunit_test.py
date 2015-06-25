@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from mobileclick.iunit import Iunit
+from mobileclick import Iunit
 
 class IunitTestCase(unittest.TestCase):
     def test_iunit_read(self):

@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from mobileclick.query import Query
+from mobileclick import Query
 
 class QueryTestCase(unittest.TestCase):
     def test_query_read(self):

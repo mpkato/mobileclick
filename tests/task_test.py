@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from mobileclick.task import Task
+from mobileclick import Task
 from .testutils import create_query_subset, drop_query_subset
 
 class TaskTestCase(unittest.TestCase):

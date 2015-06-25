@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import nose
 import os
-from mobileclick.ranking_run import RankingRun
+from mobileclick import RankingRun
 from .method_test import MethodTestCase
 
 class RankingRunTestCase(MethodTestCase):

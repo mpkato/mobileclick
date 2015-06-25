@@ -3,7 +3,7 @@ import unittest
 import nose
 import re
 import os
-from mobileclick.index_factory import IndexFactory
+from mobileclick import IndexFactory
 
 class IndexFactoryTestCase(unittest.TestCase):
 
