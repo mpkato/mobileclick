@@ -1,13 +1,13 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
+from mobileclick.query import Query
 
 class QueryTestCase(unittest.TestCase):
     def test_query_read(self):
         '''
         Query.read
         '''
-        from mobileclick.query import Query
         queries = Query.read('./data/MC2-training/en/1C2-E-queries.tsv')
         self.assertEqual(queries[0].qid, '1C2-E-0001')
         self.assertEqual(queries[0].body, 'michael jackson death')
@@ -17,7 +17,6 @@ class QueryTestCase(unittest.TestCase):
         '''
         Query.load
         '''
-        from mobileclick.query import Query
         query = Query.load(('1', '2',))
         self.assertEqual(query.qid, '1')
         self.assertRaises(Exception, Query.load, ('1',))
