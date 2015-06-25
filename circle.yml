@@ -7,3 +7,7 @@ dependencies:
 test:
     pre:
         - nosetests tests/scripts_test.py
+general:
+    artifacts:
+        - "runs"
+
