@@ -16,8 +16,10 @@ class IndexFactory(object):
         Read indices for a given QID
         '''
         indexfilepath = glob.glob(os.path.join(self.indexdir, '*%s*' % qid))
-        if len(indexfilepath) != 1:
-            raise Exception('')
+        if len(indexfilepath) == 0:
+            raise Exception('Index file not found: %s', qid)
+        if len(indexfilepath) > 1:
+            raise Exception('Duplicate index files: %s', str(indexfilepath))
         indexfilepath = indexfilepath[0]
         indices = self._read_index(qid, indexfilepath)
         return indices
