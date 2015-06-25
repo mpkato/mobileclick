@@ -1,17 +1,15 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from mobileclick.scripts.mobileclick_download_data import main
 
-class DownloadScriptTestCase(unittest.TestCase):
-    def setUp(self):
-        pass
+class ScriptsTestCase(unittest.TestCase):
 
     def test_download_mobileclick_data(self):
         '''
         Download a subset of the full training data
         '''
         import os
+        from mobileclick.scripts.mobileclick_download_data import main
         files = [
             './data/MC2-training/en/1C2-E-iunits.tsv', 
             './data/MC2-training-documents/1C2-E.HTML/1C2-E-0001-1.html'
