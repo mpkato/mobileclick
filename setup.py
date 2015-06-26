@@ -1,13 +1,9 @@
 # -*- coding:utf-8 -*-
 from setuptools import setup
 
-with open('README.md') as description_file:
-    long_description = description_file.read()
-
 setup(
     name        = "mobileclick",
     description = "mobileclick provides baseline methods and utility scripts for the NTCIR-12 MobileClick-2 task",
-    long_description=long_description,
     author      = "Makoto P. Kato",
     author_email = "kato@dl.kuis.kyoto-u.ac.jp",
     license     = "MIT License",
