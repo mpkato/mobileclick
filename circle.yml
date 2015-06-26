@@ -9,7 +9,7 @@ dependencies:
 test:
     pre:
         - python -m nltk.downloader maxent_treebank_pos_tagger punkt stopwords
-        - nosetests tests/scripts_test.py
+        - nosetests tests/scripts_test.py:ScriptsTestCase.test_mobileclick_download_data
     override:
         - nosetests -v --with-coverage --with-xunit --xunit-file=$CIRCLE_TEST_REPORTS/nosetests/nosetests.xml
     post:
