@@ -3,12 +3,15 @@ machine:
         version: 2.7.9
 dependencies:
     pre:
+        - pip install python-coveralls
         - pip install --upgrade setuptools
         - sh mecab_install.sh
 test:
     pre:
         - python -m nltk.downloader maxent_treebank_pos_tagger punkt stopwords
         - nosetests tests/scripts_test.py
+    post:
+        - coveralls
 general:
     artifacts:
         - "runs"
