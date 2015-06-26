@@ -4,7 +4,7 @@ def main(argv=None):
     import os
     from mobileclick.task import Task
     from mobileclick.methods import LangModelRankingMethod
-    from mobileclick.nlp import EnglishParser
+    from mobileclick.nlp import EnglishParser, JapaneseParser
     from .scriptutils import ranking_parser
     DESC = 'A LM-based baseline for the iUnit ranking subtask.'
 
@@ -23,7 +23,7 @@ def main(argv=None):
     if args.language == 'english':
         parser = EnglishParser()
     elif args.language == 'japanese':
-        raise Exception("Not implemented")
+        parser = JapaneseParser()
     else:
         raise Exception("Unknown language")
 

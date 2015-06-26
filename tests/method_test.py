@@ -6,13 +6,15 @@ from .testutils import create_query_subset, drop_query_subset
 class MethodTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.queryfilepath = create_query_subset(
-            './data/MC2-training/en/1C2-E-queries.tsv',
-            './data/MC2-training-documents/1C2-E.INDX/')
-        self.tasks = Task.read(self.queryfilepath,
-            './data/MC2-training/en/1C2-E-iunits.tsv',
-            './data/MC2-training-documents/1C2-E.INDX/',
-            './data/MC2-training-documents/1C2-E.HTML/')
+        self.tasks = {}
+        for lang in [('en', 'E'), ('ja', 'J')]:
+            queryfilepath = create_query_subset(
+                './data/MC2-training/%s/1C2-%s-queries.tsv' % lang,
+                './data/MC2-training-documents/1C2-%s.INDX/' % lang[1])
+            self.tasks[lang[1]] = Task.read(queryfilepath,
+                './data/MC2-training/%s/1C2-%s-iunits.tsv' % lang,
+                './data/MC2-training-documents/1C2-%s.INDX/' % lang[1],
+                './data/MC2-training-documents/1C2-%s.HTML/' % lang[1])
 
     def tearDown(self):
         drop_query_subset()

@@ -11,14 +11,14 @@ class RankingRunTestCase(MethodTestCase):
         Task.read
         '''
         run = RankingRun('ORG-test-1', 'this is a test run')
-        for task in self.tasks:
+        for task in self.tasks['E']:
             run.add(task.query.qid, [(i, 0) for i in task.iunits])
         run.save('./tmp')
         self.assertTrue(os.path.exists('./tmp/ORG-test-1.tsv'))
         with open('./tmp/ORG-test-1.tsv', 'r') as f:
             lines = f.readlines()
         self.assertEqual(len(lines),
-            sum([len(t.iunits) for t in self.tasks]) + 1)
+            sum([len(t.iunits) for t in self.tasks['E']]) + 1)
         self.assertEqual(lines[0].strip(), 'this is a test run')
         self.assertEqual(len(lines[1].split('\t')), 3)
 
@@ -38,7 +38,7 @@ class RankingRunTestCase(MethodTestCase):
         '''
         run = RankingRun('ORG-test-1', 'this is a test run')
         iunits = []
-        for task in self.tasks:
+        for task in self.tasks['E']:
             run.add(task.query.qid, [(i, 0) for i in task.iunits])
             for i in task.iunits:
                 iunits.append(i.uid)
@@ -58,11 +58,11 @@ class RankingRunTestCase(MethodTestCase):
         Test the validation
         '''
         run = RankingRun('ORG-test-1', 'this is a test run')
-        for task in self.tasks[:-2]:
+        for task in self.tasks['E'][:-2]:
             run.add(task.query.qid, [(i, 0) for i in task.iunits])
-        queries = [t.query for t in self.tasks]
+        queries = [t.query for t in self.tasks['E']]
         self.assertFalse(run.validation(queries))
-        for task in self.tasks[-2:]:
+        for task in self.tasks['E'][-2:]:
             run.add(task.query.qid, [(i, 0) for i in task.iunits])
         self.assertTrue(run.validation(queries))
 

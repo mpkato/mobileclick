@@ -15,7 +15,7 @@ setup(
         'mobileclick.methods',
         'mobileclick.scripts'
         ],
-    install_requires = ['BeautifulSoup', 'nltk', 'numpy'],
+    install_requires = ['BeautifulSoup', 'nltk', 'numpy', 'mecab-python'],
     entry_points = {
         'console_scripts': [
             'mobileclick_download_data=mobileclick.scripts.mobileclick_download_data:main',
