@@ -1,26 +1,13 @@
 # -*- coding:utf-8 -*-
 
 def main(argv=None):
-    import os, argparse
+    import os
     from mobileclick.task import Task
     from mobileclick.methods import RandomRankingMethod
+    from .scriptutils import ranking_parser
     DESC = 'A random baseline for the iUnit ranking subtask.'
 
-    parser = argparse.ArgumentParser(
-        prog="mobileclick_random_ranking_method",
-        description=DESC)
-    parser.add_argument('--runname', required="Run name",
-        help='Name of this run (= output filename)')
-    parser.add_argument('--query', required=True,
-        help='Query filepath')
-    parser.add_argument('--iunit', required=True,
-        help='iUnit filepath')
-    parser.add_argument('--indexdir', required=True,
-        help='Index dirpath')
-    parser.add_argument('--pagedir', required=True,
-        help='Webpage dirpath')
-    parser.add_argument('--outputdir', default='./',
-        help='Output dirpath')
+    parser = ranking_parser(prog="mobileclick_random_ranking_method", desc=DESC)
     if argv:
         args = parser.parse_args(argv)
     else:

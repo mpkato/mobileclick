@@ -8,7 +8,7 @@ from .method_test import MethodTestCase
 class LangModelRankingMethodTestCase(MethodTestCase):
     def test_generate_run(self):
         '''
-        RandomRankingMethod.generate_run
+        LangModelRankingMethod.generate_run
         '''
         method = LangModelRankingMethod(EnglishParser())
         run = method.generate_run('test', 'test', self.tasks)

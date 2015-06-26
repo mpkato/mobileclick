@@ -24,7 +24,7 @@ class ScriptsTestCase(unittest.TestCase):
 
     def test_mobileclick_random_ranking_method(self):
         '''
-        Randon ranking method
+        Random ranking method
         '''
         from mobileclick.scripts.mobileclick_random_ranking_method import main
         queryfilepath = create_query_subset(
@@ -37,6 +37,25 @@ class ScriptsTestCase(unittest.TestCase):
             '--index', './data/MC2-training-documents/1C2-E.INDX/',
             '--pagedir', './data/MC2-training-documents/1C2-E.HTML/',
             '--outputdir', './runs'])
+
+        drop_query_subset()
+
+    def test_mobileclick_lang_model_ranking_method(self):
+        '''
+        Lang Model ranking method
+        '''
+        from mobileclick.scripts.mobileclick_lang_model_ranking_method import main
+        queryfilepath = create_query_subset(
+            './data/MC2-training/en/1C2-E-queries.tsv',
+            './data/MC2-training-documents/1C2-E.INDX/')
+
+        main(['--runname', 'test',
+            '--query', queryfilepath,
+            '--iunit', './data/MC2-training/en/1C2-E-iunits.tsv',
+            '--index', './data/MC2-training-documents/1C2-E.INDX/',
+            '--pagedir', './data/MC2-training-documents/1C2-E.HTML/',
+            '--outputdir', './runs',
+            '--language', 'english'])
 
         drop_query_subset()
 
