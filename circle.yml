@@ -4,6 +4,7 @@ machine:
 dependencies:
     pre:
         - pip install --upgrade setuptools
+        - sh mecab_install.sh
 test:
     pre:
         - python -m nltk.downloader maxent_treebank_pos_tagger punkt stopwords
