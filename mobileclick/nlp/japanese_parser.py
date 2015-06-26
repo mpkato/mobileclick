@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import MeCab
+from .nlputils import normalize
 
 class JapaneseParser(object):
     def __init__(self):
@@ -11,7 +12,7 @@ class JapaneseParser(object):
         '''
         tokens = [w[0] for w in self.pos_tokenize(sentence)]
         tokens = self.stopword_filter(tokens)
-        tokens = self.normalize(tokens)
+        tokens = normalize(tokens)
         return tokens
 
     def pos_tokenize(self, sentence):
@@ -27,7 +28,7 @@ class JapaneseParser(object):
         tagged_tokens = self.pos_tokenize(sentence)
         nouns = self.noun_filter(tagged_tokens)
         nouns = self.stopword_filter(nouns, key=lambda x: x[0])
-        nouns = self.normalize(nouns, key=lambda x: x[0])
+        nouns = normalize(nouns, key=lambda x: x[0])
         return nouns
 
     def _mecab_tokenize(self, sentence):
@@ -56,9 +57,3 @@ class JapaneseParser(object):
         '''
         return [token for token in tokens
             if token[1].startswith('名詞')]
-
-    def normalize(self, tokens, key=lambda x: x):
-        '''
-        Convert tokens to lowercase
-        '''
-        return [key(token).lower() for token in tokens]

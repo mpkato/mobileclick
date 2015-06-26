@@ -31,14 +31,6 @@ class EnglishParserTestCase(unittest.TestCase):
         result = self.ep.noun_filter(self.ep.pos_tokenize(self.txt))
         self.assertEqual(result[0], ('Thursday', 'NNP'))
 
-    def test_english_parser_normalize(self):
-        '''
-        EnglishParser.normalize
-        '''
-        result = self.ep.normalize(self.ep.pos_tokenize(self.txt),
-            lambda x: x[0])
-        self.assertEqual(result[0], 'at')
-
     def test_english_parser_noun_tokenize(self):
         '''
         EnglishParser.noun_parse

@@ -42,14 +42,6 @@ class JapaneseParserTestCase(unittest.TestCase):
         self.assertEqual(result[1], ('天気',
             '名詞,一般,*,*,*,*,天気,テンキ,テンキ'))
 
-    def test_japanese_parser_normalize(self):
-        '''
-        JapaneseParser.normalize
-        '''
-        result = self.ep.normalize(self.ep.pos_tokenize(self.txt),
-            lambda x: x[0])
-        self.assertEqual(result[1], '今日')
-
     def test_japanese_parser_noun_tokenize(self):
         '''
         JapaneseParser.noun_parse

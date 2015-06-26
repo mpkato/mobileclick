@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import nltk
 from nltk.corpus import stopwords
+from .nlputils import normalize
 
 class EnglishParser(object):
     def __init__(self):
@@ -12,18 +13,16 @@ class EnglishParser(object):
         '''
         Fastest word tokenization
         '''
-        tokens = [token for sent in self.stokenizer.tokenize(sentence)
-                    for token in self.wtokenizer.tokenize(sent)]
+        tokens = self._tokenize_sents(sentence)
         tokens = self.stopword_filter(tokens)
-        tokens = self.normalize(tokens)
+        tokens = normalize(tokens)
         return tokens
 
     def pos_tokenize(self, sentence):
         '''
         Parse sentences and output pos-tagged tokens.
         '''
-        tokens = [token for sent in self.stokenizer.tokenize(sentence)
-                    for token in self.wtokenizer.tokenize(sent)]
+        tokens = self._tokenize_sents(sentence)
         tagged_tokens = self.tagger.tag(tokens)
         return tagged_tokens
 
@@ -34,7 +33,7 @@ class EnglishParser(object):
         tagged_tokens = self.pos_tokenize(sentence)
         nouns = self.noun_filter(tagged_tokens)
         nouns = self.stopword_filter(nouns, key=lambda x: x[0])
-        nouns = self.normalize(nouns, key=lambda x: x[0])
+        nouns = normalize(nouns, key=lambda x: x[0])
         return nouns
 
     def stopword_filter(self, tokens, key=lambda x: x):
@@ -51,14 +50,9 @@ class EnglishParser(object):
         return [token for token in tokens
             if token[1].startswith('N')]
 
-    def normalize(self, tokens, key=lambda x: x):
+    def _tokenize_sents(self, sentence):
         '''
-        Convert tokens to lowercase
+        Sentence tokenization
         '''
-        return [key(token).lower() for token in tokens]
-
-if __name__ == '__main__':
-    ep = EnglishParser()
-    tokens = ep.parse("At 8 o'clock on Thursday morning Arthur didn't feel very good.")
-    stopped = ep.stopword_filter(tokens, key=lambda x: x[0])
-    nouns = ep.noun_filter(stopped)
+        return [token for sent in self.stokenizer.tokenize(sentence)
+            for token in self.wtokenizer.tokenize(sent)]
