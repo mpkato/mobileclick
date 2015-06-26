@@ -47,7 +47,7 @@ Password: <Your password>
 
 Replicate the random iUnit ranking baseline:
 ```
-$ mobileclick_lang_model_ranking_method --runname random_ranking_method --query data/MC2-training/en/1C2-E-queries.tsv --iunit data/MC2-training/en/1C2-E-iunits.tsv --indexdir data/MC2-training-documents/1C2-E.INDX --pagedir data/MC2-training-documents/1C2-E.HTML
+$ mobileclick_random_ranking_method --runname random_ranking_method --query data/MC2-training/en/1C2-E-queries.tsv --iunit data/MC2-training/en/1C2-E-iunits.tsv --indexdir data/MC2-training-documents/1C2-E.INDX --pagedir data/MC2-training-documents/1C2-E.HTML
 ```
 
 Replicate the LM-based iUnit ranking baseline:
