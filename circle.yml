@@ -11,7 +11,7 @@ test:
         - python -m nltk.downloader maxent_treebank_pos_tagger punkt stopwords
         - nosetests tests/scripts_test.py
     override:
-        - nosetests -v --with-coverage --with-xunit --xunit-file=/tmp/circle-junit.WGnORb4/nosetests/nosetests.xml
+        - nosetests -v --with-coverage --with-xunit --xunit-file=$CIRCLE_TEST_REPORTS/nosetests/nosetests.xml
     post:
         - coveralls
 general:
