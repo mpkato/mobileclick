@@ -14,7 +14,7 @@ class MecabTestCase(unittest.TestCase):
         while node:
             result.append((node.surface, node.feature))
             node = node.next
-        print result
+        self.assertEqual(result[1][0], '今日')
 
 
 if __name__ == '__main__':
