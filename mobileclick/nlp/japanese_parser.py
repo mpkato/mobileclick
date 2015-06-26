@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import MeCab
-from .nlputils import normalize
+from .parser import Parser
 
-class JapaneseParser(object):
+class JapaneseParser(Parser):
     def __init__(self):
         self.tagger = MeCab.Tagger()
 
@@ -10,9 +10,9 @@ class JapaneseParser(object):
         '''
         Word tokenization
         '''
-        tokens = [w[0] for w in self.pos_tokenize(sentence)]
+        tokens = [w[0] for w in self._mecab_tokenize(sentence)]
         tokens = self.stopword_filter(tokens)
-        tokens = normalize(tokens)
+        tokens = self.normalize(tokens)
         return tokens
 
     def pos_tokenize(self, sentence):
@@ -20,30 +20,6 @@ class JapaneseParser(object):
         Parse sentences and output pos-tagged tokens.
         '''
         return self._mecab_tokenize(sentence)
-
-    def noun_tokenize(self, sentence):
-        '''
-        Extract only nouns
-        '''
-        tagged_tokens = self.pos_tokenize(sentence)
-        nouns = self.noun_filter(tagged_tokens)
-        nouns = self.stopword_filter(nouns, key=lambda x: x[0])
-        nouns = normalize(nouns, key=lambda x: x[0])
-        return nouns
-
-    def _mecab_tokenize(self, sentence):
-        '''
-        Tokenization by MeCab
-        '''
-        if isinstance(sentence, unicode):
-            # assume utf-8
-            sentence = sentence.encode('utf-8')
-        node = self.tagger.parseToNode(sentence)
-        result = []
-        while node:
-            result.append((node.surface, node.feature))
-            node = node.next
-        return result
 
     def stopword_filter(self, tokens, key=lambda x: x):
         '''
@@ -57,3 +33,17 @@ class JapaneseParser(object):
         '''
         return [token for token in tokens
             if token[1].startswith('名詞')]
+
+    def _mecab_tokenize(self, sentence):
+        '''
+        Sentence tokenization
+        '''
+        if isinstance(sentence, unicode):
+            # assume utf-8
+            sentence = sentence.encode('utf-8')
+        node = self.tagger.parseToNode(sentence)
+        result = []
+        while node:
+            result.append((node.surface, node.feature))
+            node = node.next
+        return result

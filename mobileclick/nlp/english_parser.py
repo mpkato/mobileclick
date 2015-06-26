@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import nltk
 from nltk.corpus import stopwords
-from .nlputils import normalize
+from .parser import Parser
 
-class EnglishParser(object):
+class EnglishParser(Parser):
     def __init__(self):
         self.stokenizer = nltk.tokenize.PunktSentenceTokenizer()
         self.wtokenizer = nltk.tokenize.TreebankWordTokenizer()
@@ -15,7 +15,7 @@ class EnglishParser(object):
         '''
         tokens = self._tokenize_sents(sentence)
         tokens = self.stopword_filter(tokens)
-        tokens = normalize(tokens)
+        tokens = self.normalize(tokens)
         return tokens
 
     def pos_tokenize(self, sentence):
@@ -25,16 +25,6 @@ class EnglishParser(object):
         tokens = self._tokenize_sents(sentence)
         tagged_tokens = self.tagger.tag(tokens)
         return tagged_tokens
-
-    def noun_tokenize(self, sentence):
-        '''
-        Extract only nouns
-        '''
-        tagged_tokens = self.pos_tokenize(sentence)
-        nouns = self.noun_filter(tagged_tokens)
-        nouns = self.stopword_filter(nouns, key=lambda x: x[0])
-        nouns = normalize(nouns, key=lambda x: x[0])
-        return nouns
 
     def stopword_filter(self, tokens, key=lambda x: x):
         '''
