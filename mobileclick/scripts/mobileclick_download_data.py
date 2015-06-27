@@ -88,12 +88,12 @@ def find_download_links(istest):
     doclink = html.find(is_download_doclink)['href'] + '?dl=1'
     return (link, doclink)
 
-def deploy_data(filename):
+def deploy_data(filename, datadir='./data'):
     import os, tarfile, zipfile, glob
     if tarfile.is_tarfile(filename):
         with tarfile.open(filename, 'r') as tf:
-            tf.extractall('./data')
-    for filepath in glob.glob('./data/*/*.zip'):
+            tf.extractall(datadir)
+    for filepath in glob.glob('%s/*/*.zip' % datadir):
         basedir = os.path.dirname(filepath)
         if zipfile.is_zipfile(filepath):
             with zipfile.ZipFile(filepath, 'r') as zf:
