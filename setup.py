@@ -8,7 +8,7 @@ setup(
     author_email = "kato@dl.kuis.kyoto-u.ac.jp",
     license     = "MIT License",
     url         = "https://github.com/mpkato/mobileclick",
-    version='0.1.3',
+    version='0.1.4',
     packages=[
         'mobileclick',
         'mobileclick.nlp',
