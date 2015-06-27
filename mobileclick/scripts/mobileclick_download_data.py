@@ -15,13 +15,15 @@ def main(istest=False):
         sys.stdout.write('Email: ')
         email = raw_input()
         password = getpass.getpass()
+        print
     if login(email, password):
         links = find_download_links(istest)
         for link in links:
             filename = download_file(link)
-            print
+            print "Extracting files ..."
             deploy_data(filename)
-        print "\nFinished downloading the data."
+            print
+        print "\nFinished downloading and extracting all the data."
         print "Please find downloaded files at './data'."
     else:
         print "Login failed"
