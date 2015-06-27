@@ -31,7 +31,12 @@ You can also install mobileclick from the source code:
 $ python setup.py install
 ```
 
-Mecab and mecab-python installation:
+NLTK corpus download (for English):
+```
+$ sh nltk_download.sh
+```
+
+Mecab and mecab-python installation (for Japanese):
 ```
 $ sh mecab_install.sh
 ```
