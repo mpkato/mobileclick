@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import MeCab
 from .parser import Parser
 
 class JapaneseParser(Parser):
     def __init__(self):
+        import MeCab
         self.tagger = MeCab.Tagger()
 
     def word_tokenize(self, sentence):
