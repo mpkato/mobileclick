@@ -29,13 +29,15 @@ class RankingRun(object):
         '''
         qids = sorted(self.results.keys())
         filename = self.FILENAME_TEMPLATE % safe_filename(self.name)
-        with open(os.path.join(dirpath, filename), 'w') as f:
+        filepath = os.path.join(dirpath, filename)
+        with open(filepath, 'w') as f:
             # desc line
             f.write(remove_breaks(self.desc) + '\n')
             for qid in qids:
                 iunit_scores = self.results[qid]
                 for iunit, score in iunit_scores:
                     f.write('%s\t%s\n' % (iunit.output(), score))
+        return filepath
 
     def validation(self, queries):
         '''
