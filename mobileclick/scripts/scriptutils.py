@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
-import argparse
+import os, argparse
+from mobileclick.task import Task
 
 def ranking_parser(prog, desc):
     parser = argparse.ArgumentParser(prog=prog, description=desc)
@@ -16,3 +17,10 @@ def ranking_parser(prog, desc):
     parser.add_argument('--outputdir', default='./',
         help='Output dirpath')
     return parser
+
+def load_data_generate_run(args, desc, method):
+    tasks = Task.read(args.query, args.iunit, args.indexdir, args.pagedir)
+    run = method.generate_run(args.runname, desc, tasks)
+    if not os.path.exists(args.outputdir):
+        os.makedirs(args.outputdir)
+    run.save(args.outputdir)

@@ -1,10 +1,8 @@
 # -*- coding:utf-8 -*-
 
 def main(argv=None):
-    import os
-    from mobileclick.task import Task
     from mobileclick.methods import LangModelRankingMethod
-    from .scriptutils import ranking_parser
+    from .scriptutils import ranking_parser, load_data_generate_run
     DESC = 'A LM-based baseline for the iUnit ranking subtask.'
 
     parser = ranking_parser(prog="mobileclick_lang_model_ranking_method", desc=DESC)
@@ -19,22 +17,21 @@ def main(argv=None):
         args = parser.parse_args(argv)
     else:
         args = parser.parse_args()
-    if args.language == 'english':
+
+    method = LangModelRankingMethod(_get_parser(args.language),
+        min_count=args.min_count, smoothing=args.smoothing)
+    load_data_generate_run(args, DESC, method)
+
+def _get_parser(language):
+    if language == 'english':
         from mobileclick.nlp import EnglishParser
         parser = EnglishParser()
-    elif args.language == 'japanese':
+    elif language == 'japanese':
         from mobileclick.nlp import JapaneseParser
         parser = JapaneseParser()
     else:
         raise Exception("Unknown language")
-
-    tasks = Task.read(args.query, args.iunit, args.indexdir, args.pagedir)
-    method = LangModelRankingMethod(parser,
-        min_count=args.min_count, smoothing=args.smoothing)
-    run = method.generate_run(args.runname, DESC, tasks)
-    if not os.path.exists(args.outputdir):
-        os.makedirs(args.outputdir)
-    run.save(args.outputdir)
+    return parser
 
 if __name__ == '__main__':
     import sys
