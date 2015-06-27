@@ -13,4 +13,5 @@ class RandomRankingMethod(BaseRankingMethod):
         '''
         Output iUnits in the same order in the iUnit file
         '''
+        print "Processing %s" % task.query.qid
         return [(i, 0) for i in task.iunits]

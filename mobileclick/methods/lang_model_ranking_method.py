@@ -41,6 +41,7 @@ class LangModelRankingMethod(BaseRankingMethod):
         '''
         Count the frequency of words
         '''
+        print "Initializing ..."
         self.wfreqs, self.total_wfreqs = self._count_word_freq(tasks)
         self.infreqwords = self._find_infrequent_words(self.total_wfreqs)
 
@@ -48,6 +49,7 @@ class LangModelRankingMethod(BaseRankingMethod):
         '''
         Output iUnits in order of the log odds ratio
         '''
+        print "Processing %s" % task.query.qid
         wlor = self._learn_word_log_odds_ratio(task.query.qid)
         result = []
         for iunit in task.iunits:
