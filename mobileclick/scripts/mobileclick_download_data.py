@@ -60,7 +60,7 @@ def download_file(url):
     res = urllib2.urlopen(url)
     meta = res.info()
     filesize = int(meta.getheaders("Content-Length")[0])
-    print "Downloading: {0} Bytes: {1}".format(url, filesize)
+    print "Downloading: {0} (Bytes: {1})".format(url, filesize)
 
     filesize_obtained = 0
     blocksize = 8192
