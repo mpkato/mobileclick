@@ -3,23 +3,6 @@
 MOBILECLICK_URL = 'http://www.mobileclick.org'
 DOCUMENT_A_TEXT = 'Document Collection (~ 1GB)'
 SUBSET_A_TEXT = 'Subset (~ 50MB)'
-POST_DOWNLOAD_MESSAGE = '''Finished downloading the data.
-Please find downloaded files at './data',
-and try the following commands for replicating the baseline results:
-
-mobileclick_random_ranking_method --runname random_ranking_method\
---query data/MC2-training/en/1C2-E-queries.tsv\
---iunit data/MC2-training/en/1C2-E-iunits.tsv\
---indexdir data/MC2-training-documents/1C2-E.INDX\
---pagedir data/MC2-training-documents/1C2-E.HTML
-
-mobileclick_lang_model_ranking_method --runname lang_model_ranking_method
---query data/MC2-training/en/1C2-E-queries.tsv\
---iunit data/MC2-training/en/1C2-E-iunits.tsv\
---indexdir data/MC2-training-documents/1C2-E.INDX\
---pagedir data/MC2-training-documents/1C2-E.HTML\
---language english
-'''
 
 def main(istest=False):
     import sys, os, getpass
@@ -27,8 +10,8 @@ def main(istest=False):
     password = os.environ.get('MOBILECLICK_PASSWORD', None)
     if email is None or password is None:
         # if env variables are not set
-        print "Input your email and password for %s" % MOBILECLICK_URL
-        print "Please sign up if you haven't got them."
+        print "Input your email and password for %s/" % MOBILECLICK_URL
+        print "Please sign up if you haven't got them.\n"
         sys.stdout.write('Email: ')
         email = raw_input()
         password = getpass.getpass()
@@ -36,8 +19,10 @@ def main(istest=False):
         links = find_download_links(istest)
         for link in links:
             filename = download_file(link)
+            print
             deploy_data(filename)
-        print POST_DOWNLOAD_MESSAGE
+        print "\nFinished downloading the data."
+        print "Please find downloaded files at './data'."
     else:
         print "Login failed"
 
