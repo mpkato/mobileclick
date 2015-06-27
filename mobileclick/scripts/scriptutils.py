@@ -20,7 +20,13 @@ def ranking_parser(prog, desc):
 
 def load_data_generate_run(args, desc, method):
     tasks = Task.read(args.query, args.iunit, args.indexdir, args.pagedir)
+    print "Using the follwoing files/directories:"
+    print "\tquery: %s" % args.query
+    print "\tiunit: %s" % args.iunit
+    print "\tindex: %s" % args.indexdir
+    print "\tpage:  %s" % args.pagedir
     run = method.generate_run(args.runname, desc, tasks)
     if not os.path.exists(args.outputdir):
         os.makedirs(args.outputdir)
-    run.save(args.outputdir)
+    filepath = run.save(args.outputdir)
+    print "Saved results in %s" % filepath
