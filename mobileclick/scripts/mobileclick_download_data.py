@@ -11,7 +11,8 @@ def main(istest=False):
     if email is None or password is None:
         # if env variables are not set
         print "Input your email and password for %s/" % MOBILECLICK_URL
-        print "Please sign up if you haven't got them.\n"
+        print "Please sign up if you haven't got them."
+        print
         sys.stdout.write('Email: ')
         email = raw_input()
         password = getpass.getpass()
@@ -23,7 +24,7 @@ def main(istest=False):
             print "Extracting files ..."
             deploy_data(filename)
             print
-        print "\nFinished downloading and extracting all the data."
+        print "Finished downloading and extracting all the data."
         print "Please find downloaded files at './data'."
     else:
         print "Login failed"
