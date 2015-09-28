@@ -21,7 +21,7 @@ class Iunit(object):
         '''
         result = []
         with open(filepath, 'rb') as f:
-            reader = csv.reader(f, delimiter='\t')
+            reader = csv.reader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
             for row in reader:
                 iunit = Iunit.load(row)
                 result.append(iunit)

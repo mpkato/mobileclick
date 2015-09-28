@@ -30,7 +30,7 @@ class IndexFactory(object):
         '''
         result = []
         with open(filepath, 'rb') as f:
-            reader = csv.reader(f, delimiter='\t')
+            reader = csv.reader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
             for row in reader:
                 index = self._load_index(qid, row)
                 result.append(index)
