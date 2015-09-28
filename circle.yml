@@ -3,7 +3,7 @@ machine:
         version: 2.7.9
 dependencies:
     pre:
-        - pip install coverage python-coveralls
+        - pip install python-coveralls
         - pip install --upgrade setuptools
         - sh mecab_install.sh
 test:
