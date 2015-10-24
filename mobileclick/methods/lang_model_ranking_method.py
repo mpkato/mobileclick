@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from .base_ranking_method import BaseRankingMethod
+from .freq_factory import FreqFactory
 import numpy as np
 
 class LangModelRankingMethod(BaseRankingMethod):
@@ -36,14 +37,16 @@ class LangModelRankingMethod(BaseRankingMethod):
         self.parser = parser
         self.min_count = min_count
         self.smoothing = smoothing
+        self.freq_factory = FreqFactory(self.parser)
 
     def init(self, tasks):
         '''
         Count the frequency of words
         '''
         print "Initializing ..."
-        self.wfreqs, self.total_wfreqs = self._count_word_freq(tasks)
-        self.infreqwords = self._find_infrequent_words(self.total_wfreqs)
+        self.wfreqs, self.total_wfreqs = self.freq_factory.count(tasks)
+        self.infreqwords = self.freq_factory.find_infrequent_words(
+            self.total_wfreqs, self.min_count)
 
     def rank(self, task):
         '''
@@ -77,29 +80,3 @@ class LangModelRankingMethod(BaseRankingMethod):
                     - np.log(o_num + self.smoothing * w_num)
                 result[w] = pwq - pwo
         return result
-
-    def _count_word_freq(self, tasks):
-        '''
-        Count the frequency of words
-        Return: (task_word_freq, total_word_freq)
-        '''
-        task_word_freq = {}
-        total_word_freq = {}
-        for task in tasks:
-            wfreq = {}
-            for i in task.indices:
-                txt = i.title + ' ' + i.body
-                txt = txt.decode('utf-8')
-                words = self.parser.word_tokenize(txt)
-                for w in words:
-                    wfreq[w] = wfreq.get(w, 0) + 1
-                    total_word_freq[w] = total_word_freq.get(w, 0) + 1
-            task_word_freq[task.query.qid] = wfreq
-        return (task_word_freq, total_word_freq)
-
-    def _find_infrequent_words(self, total_word_freq):
-        '''
-        Find words whose frequncy is less than min_count
-        '''
-        return set([w for w, f in total_word_freq.items()
-            if f < self.min_count])
