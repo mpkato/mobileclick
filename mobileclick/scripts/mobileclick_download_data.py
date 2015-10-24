@@ -87,7 +87,6 @@ def find_download_links(datafilenames):
     html = BeautifulSoup.BeautifulSoup(res.read())
     result = []
     for datafilename in datafilenames:
-        print html.findAll('a')
         def is_download_link(node):
             return node.name == 'a' and node['href'].endswith(datafilename)
         link = html.find(is_download_link)['href'] + '?dl=1'
