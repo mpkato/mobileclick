@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 from mobileclick.task import Task
-from .testutils import create_query_subset, drop_query_subset
+from .testutils import create_query_subset, drop_tmp_files
 
 class MethodTestCase(unittest.TestCase):
 
@@ -17,7 +17,7 @@ class MethodTestCase(unittest.TestCase):
                 './data/MC2-training-documents/1C2-%s.HTML/' % lang[1])
 
     def tearDown(self):
-        drop_query_subset()
+        drop_tmp_files()
 
     def read_runfile(self, filepath):
         with open(filepath, 'r') as f:

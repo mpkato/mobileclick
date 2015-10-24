@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from .testutils import create_query_subset, drop_query_subset
+from .testutils import create_query_subset, drop_tmp_files
 
 class ScriptsTestCase(unittest.TestCase):
 
@@ -55,7 +55,7 @@ class ScriptsTestCase(unittest.TestCase):
             '--pagedir', './data/MC2-training-documents/1C2-E.HTML/',
             '--outputdir', './runs'])
 
-        drop_query_subset()
+        drop_tmp_files()
 
     def test_mobileclick_lang_model_ranking_method(self):
         '''
@@ -74,7 +74,7 @@ class ScriptsTestCase(unittest.TestCase):
             '--outputdir', './runs',
             '--language', 'english'])
 
-        drop_query_subset()
+        drop_tmp_files()
 
 if __name__ == '__main__':
     nose.main(argv=['nose', '-v'])
