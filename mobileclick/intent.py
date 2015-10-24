@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import csv
+from xml.etree.ElementTree import Element
 
 class Intent(object):
 
@@ -13,6 +14,9 @@ class Intent(object):
         Output format for submission
         '''
         return '\t'.join((self.qid, self.iid))
+
+    def to_xml(self):
+        return Element('link', iid=self.iid)
 
     @classmethod
     def read(cls, filepath):

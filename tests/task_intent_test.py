@@ -18,7 +18,7 @@ class TaskIntentTestCase(unittest.TestCase):
 
     def test_task_read(self):
         '''
-        Task.read
+        Task.read (with intents)
         '''
         tasks = Task.read(self.queryfilepath,
             './data/MC2-training/en/1C2-E-iunits.tsv',

@@ -45,4 +45,3 @@ class Task(object):
                 task = Task(query, iunits, indices)
             result.append(task)
         return result
-

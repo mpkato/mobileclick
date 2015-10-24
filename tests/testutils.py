@@ -23,7 +23,6 @@ def create_query_subset(queryfilepath, indexdirpath):
     return './tmp/%s' % outputfilename
 
 def create_tmp_intent_file(subset_queryfilepath):
-    print subset_queryfilepath
     '''
     Create an intent file for only queries in the subset
     '''
