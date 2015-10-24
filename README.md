@@ -11,7 +11,7 @@ mobileclick provides baseline methods and scripts for the NTCIR-12 MobileClick-2
 Minimum requirements:
 - Python 2.7
 - NumPy
-- nltk
+- nltk (>= 3.1)
 - BeautifulSoup
 
 Requirements for Japanese runs:
@@ -42,13 +42,27 @@ $ sh mecab_install.sh
 ```
 
 ## Installed scripts
-Download MobileClick data (Please sign up at http://www.mobileclick.org/ ):
+
+### Download
+
+Download MobileClick training data (Please sign up at http://www.mobileclick.org/ ):
 ```
-$ mobileclick_download_data
+$ mobileclick_download_training_data
 Please input the email and password for http://www.mobileclick.org
 Email: <Your email address>
 Password: <Your password>
 ```
+
+Download MobileClick test data:
+
+```
+$ mobileclick_download_test_data
+Please input the email and password for http://www.mobileclick.org
+Email: <Your email address>
+Password: <Your password>
+```
+
+### Baseline Runs
 
 Replicate the random iUnit ranking baseline:
 ```
