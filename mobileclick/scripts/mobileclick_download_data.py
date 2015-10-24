@@ -1,10 +1,8 @@
 # -*- coding:utf-8 -*-
-
 MOBILECLICK_URL = 'http://www.mobileclick.org'
-DOCUMENT_A_TEXT = 'Document Collection (~ 1GB)'
-SUBSET_A_TEXT = 'Subset (~ 50MB)'
+SUBSET_FILENAME = 'MC2-training-documents-subset.tar.gz'
 
-def main(istest=False):
+def download_and_deploy(datafilenames):
     import sys, os, getpass
     email = os.environ.get('MOBILECLICK_EMAIL', None)
     password = os.environ.get('MOBILECLICK_PASSWORD', None)
@@ -18,7 +16,7 @@ def main(istest=False):
         password = getpass.getpass()
         print
     if login(email, password):
-        links = find_download_links(istest)
+        links = find_download_links(datafilenames)
         for link in links:
             filename = download_file(link)
             print "Extracting files ..."
@@ -28,6 +26,7 @@ def main(istest=False):
         print "Please find downloaded files at './data'."
     else:
         print "Login failed"
+
 
 def login(email, password):
     import urllib, urllib2, BeautifulSoup, re
@@ -82,18 +81,18 @@ def download_file(url):
     print "Downloaded: {0}".format(url)
     return filename
 
-def find_download_links(istest):
+def find_download_links(datafilenames):
     import urllib2, BeautifulSoup
     res = urllib2.urlopen('%s/home/data' % MOBILECLICK_URL)
     html = BeautifulSoup.BeautifulSoup(res.read())
-    def is_download_link(node):
-        return node.name == 'a' and node.getText() == 'Download'
-    link = html.find(is_download_link)['href'] + '?dl=1'
-    atext = SUBSET_A_TEXT if istest else DOCUMENT_A_TEXT
-    def is_download_doclink(node):
-        return node.name == 'a' and node.getText() == atext
-    doclink = html.find(is_download_doclink)['href'] + '?dl=1'
-    return (link, doclink)
+    result = []
+    for datafilename in datafilenames:
+        print html.findAll('a')
+        def is_download_link(node):
+            return node.name == 'a' and node['href'].endswith(datafilename)
+        link = html.find(is_download_link)['href'] + '?dl=1'
+        result.append(link)
+    return result
 
 def deploy_data(filename, datadir='./data'):
     import os, tarfile, zipfile, glob
@@ -106,5 +105,3 @@ def deploy_data(filename, datadir='./data'):
             with zipfile.ZipFile(filepath, 'r') as zf:
                 zf.extractall(basedir + '/')
 
-if __name__ == '__main__':
-    main()

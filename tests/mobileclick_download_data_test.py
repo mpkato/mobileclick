@@ -18,7 +18,7 @@ class MobileclickDownloadDataTestCase(unittest.TestCase):
         Download data from http://www.mobileclick.org/home/data
         '''
         self._login()
-        links = find_download_links(True)
+        links = find_download_links(['MC2-training.tar.gz'])
         filepath = download_file(links[0])
         self.assertTrue(os.path.exists(filepath))
 
@@ -27,7 +27,7 @@ class MobileclickDownloadDataTestCase(unittest.TestCase):
         Find download links from http://www.mobileclick.org/home/data
         '''
         self._login()
-        links = find_download_links(True)
+        links = find_download_links(['MC2-training.tar.gz'])
         for link in links:
             self.assertTrue(link.startswith("http"))
 
@@ -36,7 +36,7 @@ class MobileclickDownloadDataTestCase(unittest.TestCase):
         Extract files from tar.gz
         '''
         self._login()
-        links = find_download_links(True)
+        links = find_download_links(['MC2-training.tar.gz'])
         filepath = download_file(links[0]) # MC2-training
         deploy_data(filepath, './tmp')
         self.assertTrue(os.path.exists('./tmp/MC2-training'))
@@ -48,3 +48,6 @@ class MobileclickDownloadDataTestCase(unittest.TestCase):
         email = os.environ.get('MOBILECLICK_EMAIL', None)
         password = os.environ.get('MOBILECLICK_PASSWORD', None)
         return login(email, password)
+
+if __name__ == '__main__':
+    nose.main(argv=['nose', '-v'])
