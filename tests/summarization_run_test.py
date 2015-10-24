@@ -21,6 +21,7 @@ class SummarizationRunTestCase(SummarizationMethodTestCase):
         tree = ET.parse(filepath)
         root = tree.getroot()
         self.assertIsNotNone(root.find('sysdesc'))
+        self.assertGreater(len(root.find('sysdesc').text.strip()), 0)
         for task in self.tasks['E']:
             self.assertIsNotNone(
                 root.find("result[@qid='%s']" % task.query.qid))

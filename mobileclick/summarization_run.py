@@ -13,7 +13,8 @@ class SummarizationRun(Run):
         qids = sorted(self.results.keys())
         filepath = self._get_filepath(dirpath)
         xmlroot = Element('results')
-        SubElement(xmlroot, 'sysdesc', text=self.desc)
+        sysdesc = SubElement(xmlroot, 'sysdesc')
+        sysdesc.text = self.desc
         for qid in qids:
             xmlroot.append(self.results[qid].to_xml())
         with open(filepath, 'w') as f:
