@@ -7,7 +7,7 @@ class EnglishParser(Parser):
     def __init__(self):
         self.stokenizer = nltk.tokenize.PunktSentenceTokenizer()
         self.wtokenizer = nltk.tokenize.TreebankWordTokenizer()
-        self.tagger = nltk.data.load(nltk.tag._POS_TAGGER)
+        self.tagger = nltk.tag.PerceptronTagger()
 
     def word_tokenize(self, sentence):
         '''

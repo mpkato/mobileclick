@@ -1,2 +1,2 @@
 #!/bin/bash
-python -m nltk.downloader maxent_treebank_pos_tagger punkt stopwords
+python -m nltk.downloader averaged_perceptron_tagger punkt stopwords
