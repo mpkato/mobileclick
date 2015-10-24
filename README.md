@@ -64,6 +64,8 @@ Password: <Your password>
 
 ### Baseline Runs
 
+#### iUnit Ranking Subtask
+
 Replicate the random iUnit ranking baseline:
 ```
 $ mobileclick_random_ranking_method --runname random_ranking_method \
@@ -80,6 +82,29 @@ $ mobileclick_lang_model_ranking_method --runname lang_model_ranking_method \
 --iunit data/MC2-training/en/1C2-E-iunits.tsv \
 --indexdir data/MC2-training-documents/1C2-E.INDX \
 --pagedir data/MC2-training-documents/1C2-E.HTML \
+--language english
+```
+
+#### iUnit Summarization Subtask
+
+Replicate the random iUnit summarization baseline:
+```
+$ mobileclick_random_summarization_method --runname en_random_summarization_method \
+--query data/MC2-test/en/MC2-E-queries.tsv \
+--iunit data/MC2-test/en/MC2-E-iunits.tsv \
+--intent data/MC2-test/en/MC2-E-intents.tsv \
+--indexdir data/MC2-test-documents/MC2-E.INDX \
+--pagedir data/MC2-test-documents/MC2-E.HTML
+```
+
+Replicate the LM-based iUnit summarization baseline:
+```
+$ mobileclick_lang_model_summarization_method --runname en_lang_model_summarization_method \
+--query data/MC2-test/en/MC2-E-queries.tsv \
+--iunit data/MC2-test/en/MC2-E-iunits.tsv \
+--intent data/MC2-test/en/MC2-E-intents.tsv \
+--indexdir data/MC2-test-documents/MC2-E.INDX \
+--pagedir data/MC2-test-documents/MC2-E.HTML \
 --language english
 ```
 
