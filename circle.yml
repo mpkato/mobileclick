@@ -8,7 +8,7 @@ dependencies:
         - sh mecab_install.sh
 test:
     pre:
-        - python -m nltk.downloader maxent_treebank_pos_tagger punkt stopwords
+        - sh nltk_download.sh
         - nosetests tests/scripts_test.py:ScriptsTestCase.test_mobileclick_download_training_data
     override:
         - nosetests -v --with-coverage --with-xunit --xunit-file=$CIRCLE_TEST_REPORTS/nosetests.xml
