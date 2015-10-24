@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import unittest
 import nose
-from .testutils import create_query_subset, drop_tmp_files
+from .testutils import create_query_subset, create_tmp_intent_file, drop_tmp_files
 
 class ScriptsTestCase(unittest.TestCase):
 
@@ -73,6 +73,26 @@ class ScriptsTestCase(unittest.TestCase):
             '--pagedir', './data/MC2-training-documents/1C2-E.HTML/',
             '--outputdir', './runs',
             '--language', 'english'])
+
+        drop_tmp_files()
+
+    def test_mobileclick_random_summarization_method(self):
+        '''
+        Random summarization method
+        '''
+        from mobileclick.scripts.mobileclick_random_summarization_method import main
+        queryfilepath = create_query_subset(
+            './data/MC2-training/en/1C2-E-queries.tsv',
+            './data/MC2-training-documents/1C2-E.INDX/')
+        intentfilepath = create_tmp_intent_file(queryfilepath)
+
+        main(['--runname', 'test',
+            '--query', queryfilepath,
+            '--iunit', './data/MC2-training/en/1C2-E-iunits.tsv',
+            '--intent', intentfilepath,
+            '--index', './data/MC2-training-documents/1C2-E.INDX/',
+            '--pagedir', './data/MC2-training-documents/1C2-E.HTML/',
+            '--outputdir', './runs'])
 
         drop_tmp_files()
 

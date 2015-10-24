@@ -24,7 +24,8 @@ setup(
             'mobileclick_download_training_data=mobileclick.scripts.mobileclick_download_training_data:main',
             'mobileclick_download_test_data=mobileclick.scripts.mobileclick_download_test_data:main',
             'mobileclick_random_ranking_method=mobileclick.scripts.mobileclick_random_ranking_method:main',
-            'mobileclick_lang_model_ranking_method=mobileclick.scripts.mobileclick_lang_model_ranking_method:main'
+            'mobileclick_lang_model_ranking_method=mobileclick.scripts.mobileclick_lang_model_ranking_method:main',
+            'mobileclick_random_summarization_method=mobileclick.scripts.mobileclick_random_summarization_method:main',
             ],
     },
     tests_require=['nose']
