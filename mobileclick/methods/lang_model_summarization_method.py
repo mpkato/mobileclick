@@ -21,7 +21,8 @@ class LangModelSummarizationMethod(BaseSummarizationMethod):
         '''
         Count the frequency of words
         '''
-        print "Initializing ..."
+        # duplicate message
+        #print "Initializing ..."
         self.ranking.init(tasks)
 
     def summarize(self, task):
