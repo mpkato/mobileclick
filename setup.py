@@ -27,6 +27,7 @@ setup(
             'mobileclick_lang_model_ranking_method=mobileclick.scripts.mobileclick_lang_model_ranking_method:main',
             'mobileclick_random_summarization_method=mobileclick.scripts.mobileclick_random_summarization_method:main',
             'mobileclick_lang_model_summarization_method=mobileclick.scripts.mobileclick_lang_model_summarization_method:main',
+            'mobileclick_lang_model_two_layer_summarization_method=mobileclick.scripts.mobileclick_lang_model_two_layer_summarization_method:main',
             ],
     },
     tests_require=['nose']

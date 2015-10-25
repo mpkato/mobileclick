@@ -108,6 +108,17 @@ $ mobileclick_lang_model_summarization_method --runname en_lang_model_summarizat
 --language english
 ```
 
+Replicate the LM-based two-layer iUnit summarization baseline:
+```
+$ mobileclick_lang_model_two_layer_summarization_method --runname en_lang_model_two_layer_summarization_method \
+--query data/MC2-test/en/MC2-E-queries.tsv \
+--iunit data/MC2-test/en/MC2-E-iunits.tsv \
+--intent data/MC2-test/en/MC2-E-intents.tsv \
+--indexdir data/MC2-test-documents/MC2-E.INDX \
+--pagedir data/MC2-test-documents/MC2-E.HTML \
+--language english
+```
+
 ## Generate your runs
 The current version can only deal with the iUnit ranking subtask.
 

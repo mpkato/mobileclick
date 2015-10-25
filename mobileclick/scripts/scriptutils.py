@@ -45,6 +45,14 @@ def get_parser(language):
         raise Exception("Unknown language")
     return parser
 
+def get_length_limit(language):
+    if language == 'english':
+        return 420
+    elif language == 'japanese':
+        return 280
+    else:
+        raise Exception("Unknown language")
+
 def generate_run(args, desc, method, tasks):
     run = method.generate_run(args.runname, desc, tasks)
     if not os.path.exists(args.outputdir):

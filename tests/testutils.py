@@ -33,9 +33,12 @@ def create_tmp_intent_file(subset_queryfilepath):
     with open(TEST_INTENT_FILE, 'w') as f:
         for queryline in querylines:
             qid = queryline.split('\t')[0]
-            for i in range(5):
+            for i in range(4):
                 f.write('\t'.join(
                     (qid, '%s-INTENT%04d' % (qid, i+1), 'Test%04d' % (i+1))) + '\n')
+            # for testing two layer summarization
+            f.write('\t'.join(
+                (qid, '%s-INTENT%04d' % (qid, 5), 'album')) + '\n')
     return TEST_INTENT_FILE
 
 def drop_tmp_files():
