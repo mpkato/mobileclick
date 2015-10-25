@@ -35,7 +35,7 @@ class YourSummarizationMethod(BaseSummarizationMethod):
         Index.body: summary of the webpage
         '''
 
-    def rank(self, task):
+    def summarize(self, task):
         '''
         Output Summary that consists of the first layer
         and second layers.
