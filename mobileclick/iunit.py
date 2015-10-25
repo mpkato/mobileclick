@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import csv
+from .measurable import Measurable
 from xml.etree.ElementTree import Element
 
-class Iunit(object):
+class Iunit(Measurable):
 
     def __init__(self, qid, uid, body):
         self.qid = qid

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import csv
+from .measurable import Measurable
 from xml.etree.ElementTree import Element
 
-class Intent(object):
+class Intent(Measurable):
 
     def __init__(self, qid, iid, body):
         self.qid = qid
