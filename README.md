@@ -92,7 +92,7 @@ $ mobileclick_lang_model_ranking_method \
 Replicate the random iUnit summarization baseline:
 ```
 $ mobileclick_random_summarization_method \
---runname en_random_summarization_method \
+--runname random_summarization_method \
 --query data/MC2-test/en/MC2-E-queries.tsv \
 --iunit data/MC2-test/en/MC2-E-iunits.tsv \
 --intent data/MC2-test/en/MC2-E-intents.tsv \
@@ -103,7 +103,7 @@ $ mobileclick_random_summarization_method \
 Replicate the LM-based iUnit summarization baseline:
 ```
 $ mobileclick_lang_model_summarization_method \
---runname en_lang_model_summarization_method \
+--runname lang_model_summarization_method \
 --query data/MC2-test/en/MC2-E-queries.tsv \
 --iunit data/MC2-test/en/MC2-E-iunits.tsv \
 --intent data/MC2-test/en/MC2-E-intents.tsv \
@@ -115,7 +115,7 @@ $ mobileclick_lang_model_summarization_method \
 Replicate the LM-based two-layer iUnit summarization baseline:
 ```
 $ mobileclick_lang_model_two_layer_summarization_method \
---runname en_lang_model_two_layer_summarization_method \
+--runname lang_model_two_layer_summarization_method \
 --query data/MC2-test/en/MC2-E-queries.tsv \
 --iunit data/MC2-test/en/MC2-E-iunits.tsv \
 --intent data/MC2-test/en/MC2-E-intents.tsv \
