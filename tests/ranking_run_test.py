@@ -6,9 +6,9 @@ from .method_test import MethodTestCase
 
 class RankingRunTestCase(MethodTestCase):
 
-    def test_task_read(self):
+    def test_ranking_run_save(self):
         '''
-        Task.read
+        RankingRun.save
         '''
         run = RankingRun('ORG-test-1', 'this is a test run')
         for task in self.tasks['E']:

@@ -1,35 +1,16 @@
 # -*- coding: utf-8 -*-
-import os
-from .utils import safe_filename, remove_breaks
+from .utils import remove_breaks
+from .run import Run
 
-class RankingRun(object):
+class RankingRun(Run):
     FILENAME_TEMPLATE = '%s.tsv'
-
-    def __init__(self, name, desc):
-        '''
-        name is used for the output filename
-        desc is written at the first line of the output file
-        '''
-        self.name = name
-        self.desc = desc
-        self.results = {}
-
-    def add(self, qid, iunit_scores):
-        '''
-        Add a sorted iUnit list
-        Do not add iUnits more than once for the same QID
-        '''
-        if qid in self.results:
-            raise Exception("Duplicate addition: %s" % qid)
-        self.results[qid] = iunit_scores
 
     def save(self, dirpath='./'):
         '''
         Save the current results
         '''
         qids = sorted(self.results.keys())
-        filename = self.FILENAME_TEMPLATE % safe_filename(self.name)
-        filepath = os.path.join(dirpath, filename)
+        filepath = self._get_filepath(dirpath)
         with open(filepath, 'w') as f:
             # desc line
             f.write(remove_breaks(self.desc) + '\n')
@@ -38,9 +19,3 @@ class RankingRun(object):
                 for iunit, score in iunit_scores:
                     f.write('%s\t%s\n' % (iunit.output(), score))
         return filepath
-
-    def validation(self, queries):
-        '''
-        Return True if all the queries have been added
-        '''
-        return all([q.qid in self.results for q in queries])

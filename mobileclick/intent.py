@@ -3,41 +3,42 @@ import csv
 from .measurable import Measurable
 from xml.etree.ElementTree import Element
 
-class Iunit(Measurable):
+class Intent(Measurable):
 
-    def __init__(self, qid, uid, body):
+    def __init__(self, qid, iid, body):
         self.qid = qid
-        self.uid = uid
+        self.iid = iid
         self.body = body
 
     def output(self):
         '''
         Output format for submission
         '''
-        return '\t'.join((self.qid, self.uid))
+        return '\t'.join((self.qid, self.iid))
 
     def to_xml(self):
-        return Element('iunit', uid=self.uid)
+        return Element('link', iid=self.iid)
 
     @classmethod
     def read(cls, filepath):
         '''
-        Read iUnits from a tsv file
+        Read intents from a tsv file
         '''
         result = []
         with open(filepath, 'rb') as f:
             reader = csv.reader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
             for row in reader:
-                iunit = Iunit.load(row)
-                result.append(iunit)
+                intent = Intent.load(row)
+                result.append(intent)
         return result
 
     @classmethod
     def load(cls, row):
         '''
-        Load an iUnit from a tuple
+        Load an intent from a tuple
         '''
         if len(row) != 3:
             raise Exception("Invalid line: %s" % str(row))
-        qid, uid, body = row
-        return Iunit(qid, uid, body)
+        qid, iid, body = row
+        return Intent(qid, iid, body)
+

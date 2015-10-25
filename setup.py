@@ -8,7 +8,7 @@ setup(
     author_email = "kato@dl.kuis.kyoto-u.ac.jp",
     license     = "MIT License",
     url         = "https://github.com/mpkato/mobileclick",
-    version='0.1.5',
+    version='0.2.0',
     packages=[
         'mobileclick',
         'mobileclick.nlp',
@@ -24,7 +24,10 @@ setup(
             'mobileclick_download_training_data=mobileclick.scripts.mobileclick_download_training_data:main',
             'mobileclick_download_test_data=mobileclick.scripts.mobileclick_download_test_data:main',
             'mobileclick_random_ranking_method=mobileclick.scripts.mobileclick_random_ranking_method:main',
-            'mobileclick_lang_model_ranking_method=mobileclick.scripts.mobileclick_lang_model_ranking_method:main'
+            'mobileclick_lang_model_ranking_method=mobileclick.scripts.mobileclick_lang_model_ranking_method:main',
+            'mobileclick_random_summarization_method=mobileclick.scripts.mobileclick_random_summarization_method:main',
+            'mobileclick_lang_model_summarization_method=mobileclick.scripts.mobileclick_lang_model_summarization_method:main',
+            'mobileclick_lang_model_two_layer_summarization_method=mobileclick.scripts.mobileclick_lang_model_two_layer_summarization_method:main',
             ],
     },
     tests_require=['nose']

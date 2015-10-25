@@ -64,9 +64,12 @@ Password: <Your password>
 
 ### Baseline Runs
 
+#### iUnit Ranking Subtask
+
 Replicate the random iUnit ranking baseline:
 ```
-$ mobileclick_random_ranking_method --runname random_ranking_method \
+$ mobileclick_random_ranking_method \
+--runname random_ranking_method \
 --query data/MC2-training/en/1C2-E-queries.tsv \
 --iunit data/MC2-training/en/1C2-E-iunits.tsv \
 --indexdir data/MC2-training-documents/1C2-E.INDX \
@@ -75,7 +78,8 @@ $ mobileclick_random_ranking_method --runname random_ranking_method \
 
 Replicate the LM-based iUnit ranking baseline:
 ```
-$ mobileclick_lang_model_ranking_method --runname lang_model_ranking_method \
+$ mobileclick_lang_model_ranking_method \
+--runname lang_model_ranking_method \
 --query data/MC2-training/en/1C2-E-queries.tsv \
 --iunit data/MC2-training/en/1C2-E-iunits.tsv \
 --indexdir data/MC2-training-documents/1C2-E.INDX \
@@ -83,53 +87,87 @@ $ mobileclick_lang_model_ranking_method --runname lang_model_ranking_method \
 --language english
 ```
 
+#### iUnit Summarization Subtask
+
+Replicate the random iUnit summarization baseline:
+```
+$ mobileclick_random_summarization_method \
+--runname en_random_summarization_method \
+--query data/MC2-test/en/MC2-E-queries.tsv \
+--iunit data/MC2-test/en/MC2-E-iunits.tsv \
+--intent data/MC2-test/en/MC2-E-intents.tsv \
+--indexdir data/MC2-test-documents/MC2-E.INDX \
+--pagedir data/MC2-test-documents/MC2-E.HTML
+```
+
+Replicate the LM-based iUnit summarization baseline:
+```
+$ mobileclick_lang_model_summarization_method \
+--runname en_lang_model_summarization_method \
+--query data/MC2-test/en/MC2-E-queries.tsv \
+--iunit data/MC2-test/en/MC2-E-iunits.tsv \
+--intent data/MC2-test/en/MC2-E-intents.tsv \
+--indexdir data/MC2-test-documents/MC2-E.INDX \
+--pagedir data/MC2-test-documents/MC2-E.HTML \
+--language english
+```
+
+Replicate the LM-based two-layer iUnit summarization baseline:
+```
+$ mobileclick_lang_model_two_layer_summarization_method \
+--runname en_lang_model_two_layer_summarization_method \
+--query data/MC2-test/en/MC2-E-queries.tsv \
+--iunit data/MC2-test/en/MC2-E-iunits.tsv \
+--intent data/MC2-test/en/MC2-E-intents.tsv \
+--indexdir data/MC2-test-documents/MC2-E.INDX \
+--pagedir data/MC2-test-documents/MC2-E.HTML \
+--language english
+```
+
 ## Generate your runs
-The current version can only deal with the iUnit ranking subtask.
 
-### 1. Create a subclass of BaseRankingMethod
+Both of the subtasks are supported.
+Please look at examples in `examples`.
+A typical workflow is shown below:
 
+### 1. Create a subclass of BaseRankingMethod/BaseSummarizationMethod
+
+For iUnit Ranking
 ```python
-from .base_ranking_method import BaseRankingMethod
+from mobileclick.methods import BaseRankingMethod
 
 class YourRankingMethod(BaseRankingMethod):
     def init(self, tasks):
-	    '''
-    	Initialization
-    	
-		`tasks` is a list of Task instances.
-		Task.query: Query
-		Task.iunits: a list of Iunit instances
-		Task.indices: a list of Index instances
-		
-		Query:
-		Query.qid: Query ID
-		Query.body: string of the query
-		
-		Iunit:
-		Iunit.qid: Query ID
-		Iunit.uid: iUnit ID
-		Iunit.body: string of the iUnit
-		
-		Index (index information of a webpage in the provided document collection):
-		Index.qid: Query ID
-		Index.filepath: filepath of an HTML file
-		Index.rank: rank in a search engine result page
-		Index.title: webpage title
-		Index.url: webpage url
-		Index.body: summary of the webpage
     	'''
-
-    def rank(self, task):
-        '''
+    	Initialization
+    	'''
+ 	def rank(self, task):
+	'''
         Output ranked pairs of an iUnits and a score
-        
-        e.g. Random ranking method
-        return [(i, 0) for i in task.iunits]
+    '''
+```
+
+For iUnit Summarization
+```python
+from mobileclick.methods import BaseSummarizationMethod
+from mobileclick import Summary
+
+class YourSummarizationMethod(BaseSummarizationMethod):
+    def init(self, tasks):
+        '''
+        Initialization
+        '''
+    def summarize(self, task):
+        '''
+        Output an instance of Summary.
         '''
 ```
 
 ### 2. Generate a run
+
+For iUnit Ranking
 ```python
+from mobileclick import Task
 tasks = Task.read(
 	"data/MC2-training/en/1C2-E-queries.tsv",
 	"data/MC2-training/en/1C2-E-iunits.tsv",
@@ -140,7 +178,21 @@ run = method.generate_run("YourRun", "This is your run", tasks)
 run.save('./')
 ```
 
-Upload "./YourRun.tsv" to http://www.mobileclick.org/ for evaluation!
+For iUnit Summarization
+```python
+from mobileclick import Task
+tasks = Task.read(
+    "data/MC2-test/en/MC2-E-queries.tsv",
+    "data/MC2-test/en/MC2-E-iunits.tsv",
+    "data/MC2-test-documents/MC2-E.INDX",
+    "data/MC2-test-documents/MC2-E.HTML",
+    "data/MC2-test/en/MC2-E-intents.tsv")
+method = YourSummarizationMethod()
+run = method.generate_run("YourRun", "This is your run", tasks)
+run.save('./')
+```
+
+Upload `./YourRun.tsv` or `./YourRun.xml` to http://www.mobileclick.org/ for evaluation!
 
 ## License
 MIT License (see LICENSE file).
